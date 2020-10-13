@@ -5,10 +5,32 @@ import SkillInputContainer from "./SkillInputContainer";
 import "../styles/App.css";
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.handleChangeSkill = this.handleChangeSkill.bind(this);
+    this.handleChangeImprovements = this.handleChangeImprovements.bind(this);
+    this.handleChangeAttention = this.handleChangeAttention.bind(this);
+    this.state = {
+      skills: [],
+      improvements: [],
+      attention: [],
+    };
+  }
   onSubmit(event) {
     event.preventDefault();
     console.log("submitted");
   }
+
+  handleChangeSkill(skills) {
+    this.setState({ skills: skills });
+  }
+  handleChangeImprovements(skills) {
+    this.setState({ improvements: skills });
+  }
+  handleChangeAttention(skills) {
+    this.setState({ attention: skills });
+  }
+
   render() {
     return (
       <form onSubmit={this.onSubmit}>
@@ -18,13 +40,13 @@ class App extends React.Component {
         Hit "Enter" to confirm, Click to remove
         <hr />
         <h2 htmlFor=''>Skills to improve</h2>
-        <SkillInputContainer />
+        <SkillInputContainer onSkillChange={this.handleChangeSkill} />
         <hr />
         <h2 htmlFor=''>Areas of strength</h2>
-        <SkillInputContainer />
+        <SkillInputContainer onSkillChange={this.handleChangeImprovements} />
         <hr />
         <h2 htmlFor=''>Areas of attention</h2>
-        <SkillInputContainer />
+        <SkillInputContainer onSkillChange={this.handleChangeAttention} />
         <br />
         <br />
         <button type='submit'>Submit</button>

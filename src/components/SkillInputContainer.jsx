@@ -6,7 +6,7 @@ class SkillInputContainer extends React.Component {
     super();
     this.handleFocus = this.handleFocus.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleKeypress = this.handleKeypress.bind(this);
+    // this.handleKeypress = this.handleKeypress.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleClick = this.handleClick.bind(this);
 
@@ -39,29 +39,47 @@ class SkillInputContainer extends React.Component {
     this.setState({ content_add: usr_input });
   }
 
-  handleKeypress(event) {
-    if (event.key === "Enter") {
-      var newArray = this.state.skills;
-      var currentcontent = this.state.content_add.trim();
-      if (!currentcontent) {
-        return;
-      }
+  // handleKeypress(event) {
+  //   if (event.key === "Enter") {
+  //     let newArray = this.state.skills;
+  //     let currentcontent = this.state.content_add.trim();
+  //     if (!currentcontent) {
+  //       return;
+  //     }
 
-      var currentWidth = this.helperspan.offsetWidth;
-      newArray.push({
-        content: currentcontent,
-        id: ++this.lastId,
-        itemWidth: currentWidth + 2,
-      });
-      this.setState({
-        skills: newArray,
-        content_add: "",
-      });
-    }
-  }
+  //     let currentWidth = this.helperspan.offsetWidth;
+  //     newArray.push({
+  //       content: currentcontent,
+  //       id: ++this.lastId,
+  //       itemWidth: currentWidth + 2,
+  //     });
+  //     this.setState({
+  //       skills: newArray,
+  //       content_add: "",
+  //     });
+  //     this.props.onSkillChange(newArray);
+  //   }
+  // }
 
   handleBlur(event) {
     this.setState({ content_add: "add +" });
+    let newArray = this.state.skills;
+    let currentcontent = this.state.content_add.trim();
+    if (!currentcontent) {
+      return;
+    }
+
+    let currentWidth = this.helperspan.offsetWidth;
+    newArray.push({
+      content: currentcontent,
+      id: ++this.lastId,
+      itemWidth: currentWidth + 2,
+    });
+    this.setState({
+      skills: newArray,
+      content_add: "",
+    });
+    this.props.onSkillChange(newArray);
   }
 
   handleClick(event) {
@@ -70,6 +88,7 @@ class SkillInputContainer extends React.Component {
       return listitem.id !== idToRemove;
     });
     this.setState({ skills: newArray });
+    this.props.onSkillChange(newArray);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -95,7 +114,7 @@ class SkillInputContainer extends React.Component {
           currentcolor={this.state.currentcolor}
           handleBlur={this.handleBlur}
           handleChange={this.handleChange}
-          handleKeypress={this.handleKeypress}
+          // handleKeypress={this.handleKeypress}
           handleFocus={this.handleFocus}
           handleClick={this.handleClick}
         />

@@ -10,7 +10,7 @@ const FormInputContainer = ({
   currentcolor,
   handleBlur,
   handleChange,
-  handleKeypress,
+  // handleKeypress,
   handleFocus,
   handleClick,
 }) => {
@@ -37,6 +37,9 @@ const FormInputContainer = ({
         ))}
       </TransitionGroup>
       <input
+        onKeyPress={(e) => {
+          if (e.key === "Enter") e.preventDefault();
+        }}
         id='add'
         type='text'
         name='initvalue'
@@ -44,7 +47,7 @@ const FormInputContainer = ({
         maxLength='70'
         onFocus={handleFocus}
         onChange={handleChange}
-        onKeyPress={handleKeypress}
+        // onKeyPress={handleKeypress}
         onBlur={handleBlur}
         value={content_add}
         style={{ width: width }}
