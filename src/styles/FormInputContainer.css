@@ -1,0 +1,22 @@
+.item-transition-enter {
+  opacity: 0.01;
+}
+
+.item-transition-enter.item-transition-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-out;
+}
+
+.item-transition-exit {
+  opacity: 1;
+  transform-origin: left center;
+}
+
+.item-transition-exit.item-transition-exit-active {
+  opacity: 0.01;
+  width: 0 !important;
+  color: rgba(42, 39, 52, 0);
+  padding: 0;
+  transition: 0.2s padding ease-out, color 0.2s ease-in, opacity 0.2s ease-out,
+    width 0.2s ease-out, translate 0.2s ease-out;
+}
