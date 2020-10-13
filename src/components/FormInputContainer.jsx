@@ -37,9 +37,6 @@ const FormInputContainer = ({
         ))}
       </TransitionGroup>
       <input
-        onKeyPress={(e) => {
-          if (e.key === "Enter") e.preventDefault();
-        }}
         id='add'
         type='text'
         name='initvalue'

@@ -62,10 +62,12 @@ class SkillInputContainer extends React.Component {
   // }
 
   handleBlur(event) {
-    this.setState({ content_add: "add +" });
     let newArray = this.state.skills;
     let currentcontent = this.state.content_add.trim();
     if (!currentcontent) {
+      this.setState({
+        content_add: "add +",
+      });
       return;
     }
 
@@ -77,7 +79,7 @@ class SkillInputContainer extends React.Component {
     });
     this.setState({
       skills: newArray,
-      content_add: "",
+      content_add: "add +",
     });
     this.props.onSkillChange(newArray);
   }
