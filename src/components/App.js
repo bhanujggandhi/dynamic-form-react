@@ -3,6 +3,7 @@ import React from "react";
 import SkillInputContainer from "./SkillInputContainer";
 
 import "../styles/App.css";
+import FieldTextArea from "./FieldTextarea";
 
 class App extends React.Component {
   constructor() {
@@ -10,20 +11,31 @@ class App extends React.Component {
     this.handleChangeSkill = this.handleChangeSkill.bind(this);
     this.handleChangeImprovements = this.handleChangeImprovements.bind(this);
     this.handleChangeAttention = this.handleChangeAttention.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       skills: [],
       improvements: [],
       attention: [],
     };
   }
+
+  // Handling the form submission
   onSubmit(event) {
-    if (event.key !== "Enter" || event.key !== "enter") {
-      event.preventDefault();
-      console.log("submitted");
-    } else {
-      return;
-    }
+    event.preventDefault();
+    console.log("submitted");
+    alert(
+      "skills :" +
+        this.state.skills.map((item) => item.content) +
+        "\n" +
+        "improvements: " +
+        this.state.improvements.map((item) => item.content) +
+        "\n" +
+        "attentions: " +
+        this.state.attention.map((item) => item.content)
+    );
   }
+
+  // Fetching the state from child
 
   handleChangeSkill(skills) {
     this.setState({ skills: skills });
@@ -46,14 +58,20 @@ class App extends React.Component {
         <hr />
         <form onSubmit={this.onSubmit}>
           <h2 htmlFor=''>Skills to improve</h2>
-          <SkillInputContainer onSkillChange={this.handleChangeSkill} />
+          <SkillInputContainer onInputChange={this.handleChangeSkill} />
           <hr />
           <h2 htmlFor=''>Areas of strength</h2>
-          <SkillInputContainer onSkillChange={this.handleChangeImprovements} />
+          <SkillInputContainer onInputChange={this.handleChangeImprovements} />
           <hr />
           <h2 htmlFor=''>Areas of attention</h2>
-          <SkillInputContainer onSkillChange={this.handleChangeAttention} />
+          <SkillInputContainer onInputChange={this.handleChangeAttention} />
           <hr />
+          <h2 htmlFor=''>
+            Accomodation for learning, including required equipments
+          </h2>
+          <div className='containerText'>
+            <FieldTextArea />
+          </div>
           <br />
           <br />
           <input type='submit' value='Submit' />

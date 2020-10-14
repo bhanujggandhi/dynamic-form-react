@@ -10,10 +10,10 @@ class SkillInputContainer extends React.Component {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleClick = this.handleClick.bind(this);
 
-    this.helperspan = null;
+    this.helperSpan = null;
 
     this.state = {
-      currentcolor: [
+      currentColor: [
         "#531CB3",
         "#7149EE",
         "#B754FF",
@@ -23,31 +23,37 @@ class SkillInputContainer extends React.Component {
         "#B754FF",
         "#7149EE",
       ],
-      content_add: "add +",
+      contentAdd: "add +",
       width: 100,
       skills: [],
     };
     this.lastId = -1;
   }
 
-  handleFocus(event) {
-    this.setState({ content_add: "" });
+  // Reset value when input gets out of focus
+
+  handleFocus() {
+    this.setState({ contentAdd: "" });
   }
 
+  // Control input values
+
   handleChange(event) {
-    const usr_input = event.target.value;
-    this.setState({ content_add: usr_input });
+    const userInput = event.target.value;
+    this.setState({ contentAdd: userInput });
   }
+
+  //Saving fields on pressing enter
 
   // handleKeypress(event) {
   //   if (event.key === "Enter") {
   //     let newArray = this.state.skills;
-  //     let currentcontent = this.state.content_add.trim();
+  //     let currentcontent = this.state.contentAdd.trim();
   //     if (!currentcontent) {
   //       return;
   //     }
 
-  //     let currentWidth = this.helperspan.offsetWidth;
+  //     let currentWidth = this.helperSpan.offsetWidth;
   //     newArray.push({
   //       content: currentcontent,
   //       id: ++this.lastId,
@@ -55,23 +61,25 @@ class SkillInputContainer extends React.Component {
   //     });
   //     this.setState({
   //       skills: newArray,
-  //       content_add: "",
+  //       contentAdd: "",
   //     });
-  //     this.props.onSkillChange(newArray);
+  //     this.props.onInputChange(newArray);
   //   }
   // }
 
+  // Saving on input out of focus and updating the state
+
   handleBlur(event) {
     let newArray = this.state.skills;
-    let currentcontent = this.state.content_add.trim();
+    let currentcontent = this.state.contentAdd.trim();
     if (!currentcontent) {
       this.setState({
-        content_add: "add +",
+        contentAdd: "add +",
       });
       return;
     }
 
-    let currentWidth = this.helperspan.offsetWidth;
+    let currentWidth = this.helperSpan.offsetWidth;
     newArray.push({
       content: currentcontent,
       id: ++this.lastId,
@@ -79,10 +87,12 @@ class SkillInputContainer extends React.Component {
     });
     this.setState({
       skills: newArray,
-      content_add: "add +",
+      contentAdd: "add +",
     });
-    this.props.onSkillChange(newArray);
+    this.props.onInputChange(newArray);
   }
+
+  // Delete the field at clicking
 
   handleClick(event) {
     const idToRemove = Number(event.target.dataset["item"]);
@@ -90,18 +100,20 @@ class SkillInputContainer extends React.Component {
       return listitem.id !== idToRemove;
     });
     this.setState({ skills: newArray });
-    this.props.onSkillChange(newArray);
+    this.props.onInputChange(newArray);
   }
 
+  // Updating the width of element after every input stroke
+
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.content_add !== this.state.content_add) {
-      console.log(
-        "did update, content:",
-        this.helperspan.textContent,
-        "width",
-        this.helperspan.offsetWidth
-      );
-      const helperWidth = this.helperspan.offsetWidth;
+    if (prevState.contentAdd !== this.state.contentAdd) {
+      // console.log(
+      //   "did update, content:",
+      //   this.helperSpan.textContent,
+      //   "width",
+      //   this.helperSpan.offsetWidth
+      // );
+      const helperWidth = this.helperSpan.offsetWidth;
       this.setState({ width: Math.max(50, helperWidth + 1) });
     }
   }
@@ -111,17 +123,18 @@ class SkillInputContainer extends React.Component {
       <div>
         <FormInputContainer
           skills={this.state.skills}
-          content_add={this.state.content_add}
+          contentAdd={this.state.contentAdd}
           width={this.state.width}
-          currentcolor={this.state.currentcolor}
+          currentColor={this.state.currentColor}
           handleBlur={this.handleBlur}
           handleChange={this.handleChange}
           // handleKeypress={this.handleKeypress}
           handleFocus={this.handleFocus}
           handleClick={this.handleClick}
         />
-        <span id='helperspan' ref={(el) => (this.helperspan = el)}>
-          {this.state.content_add}
+        {/* Helper span to look at the width || Invisible in CSS */}
+        <span id='helperspan' ref={(el) => (this.helperSpan = el)}>
+          {this.state.contentAdd}
         </span>
       </div>
     );

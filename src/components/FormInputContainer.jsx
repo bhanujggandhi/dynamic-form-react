@@ -5,9 +5,9 @@ import "../styles/FormInputContainer.css";
 
 const FormInputContainer = ({
   skills,
-  content_add,
+  contentAdd,
   width,
-  currentcolor,
+  currentColor,
   handleBlur,
   handleChange,
   // handleKeypress,
@@ -27,7 +27,7 @@ const FormInputContainer = ({
               onClick={handleClick}
               data-item={listitem.id}
               style={{
-                backgroundColor: currentcolor[index % currentcolor.length],
+                backgroundColor: currentColor[index % currentColor.length],
                 width: listitem.itemWidth,
               }}
             >
@@ -46,7 +46,7 @@ const FormInputContainer = ({
         onChange={handleChange}
         // onKeyPress={handleKeypress}
         onBlur={handleBlur}
-        value={content_add}
+        value={contentAdd}
         style={{ width: width }}
       />
     </div>
