@@ -23,6 +23,7 @@ class FieldTextArea extends React.Component {
         "#ED4FEF",
         "#B754FF",
         "#7149EE",
+        "#531CB3",
       ],
       content_add: { head: "", body: "" },
       width: 100,
