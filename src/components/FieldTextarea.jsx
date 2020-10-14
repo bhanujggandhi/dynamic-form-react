@@ -146,14 +146,6 @@ class FieldTextArea extends React.Component {
             onBlur={this.handleBlur}
             value={this.state.content_add.body}
           ></textarea>
-          {/* <input
-            onFocus={handleFocus}
-            onChange={handleChange}
-            // onKeyPress={handleKeypress}
-            onBlur={handleBlur}
-            value={content_add}
-            style={{ width: width }}
-          /> */}
         </div>
         {/* <span id='helperspan' ref={(el) => (this.helperspan = el)}>
           {this.state.content_add}
